@@ -2,6 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="Y:/RFID/Alien Code - New/Alien Java SDK v2.2.0 Jan-2007/jars/AlienRFID.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/classExercisesJARS"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
