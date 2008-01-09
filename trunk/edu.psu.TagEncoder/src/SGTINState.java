@@ -11,6 +11,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.EtchedBorder;
 
 import org.accada.tdt.TDTEngine;
 import org.accada.tdt.TDTException;
@@ -24,8 +25,6 @@ import com.alien.enterpriseRFID.tags.Tag;
 
 public class SGTINState extends TagEncoderState implements ActionListener{
 	static final long serialVersionUID = 1L;
-
-	private ProgrammingPanel pp = new ProgrammingPanel();
 
 	private JLabel headerLabel = new JLabel("Header:");
 	private JLabel filterLabel = new JLabel("Filter:");
@@ -92,7 +91,7 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 	}
 
 	private void initComponents(){
-		this.setSize(500,400);
+		this.setSize(800,400);
 		this.setLayout(gbl);
 		this.setVisible(true);
 		this.setFocusable(true);
@@ -102,6 +101,7 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		helpButton.addActionListener(this);
 		quitButton.addActionListener(this);
 		pp.typeCombo.addActionListener(this);
+		dp.previewButton.addActionListener(this);
 
 		c.fill = GridBagConstraints.BOTH;
 
@@ -109,7 +109,7 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		c.gridy = 0;				
 		c.gridwidth = 4;	
 		c.gridheight = 2;		
-		c.insets = new Insets(30,0, 0, 0);
+		c.insets = new Insets(10, 20, 0, 0);
 		pp.typeCombo.setSelectedItem("SGTIN");
 		this.add(pp, c);
 
@@ -117,13 +117,14 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		c.gridy = 2;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
-		c.insets.set(10, 20, 0, 0);
+		c.insets.set(40, 20, 0, 0);
 		this.add(headerLabel, c);
 
 		c.gridx = 0; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.insets.set(10, 20, 0, 0);
 		this.add(filterLabel, c);
 
 		c.gridx = 0; 		
@@ -154,13 +155,15 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		c.gridy = 2;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;	
+		c.insets.set(40, 20, 0, 0);
 		headerText.setEnabled(false);
 		this.add(headerText, c);
 
 		c.gridx = 1; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;	
+		c.insets.set(10, 20, 0, 0);
 		this.add(filterText, c);
 
 		c.gridx = 1; 		
@@ -192,13 +195,15 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		c.gridx = 2; 		
 		c.gridy = 2;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.insets.set(40, 20, 0, 0);
 		this.add(headerLabel2, c);
 
 		c.gridx = 2; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;	
+		c.insets.set(10, 20, 0, 0);
 		this.add(filterLabel2, c);
 
 		c.gridx = 2; 		
@@ -228,13 +233,15 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		c.gridx = 3; 		
 		c.gridy = 2;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.insets.set(40, 20, 0, 0);
 		this.add(headerLabel3, c);
 
 		c.gridx = 3; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.insets.set(10, 20, 0, 0);
 		this.add(filterLabel3, c);
 
 		c.gridx = 3; 		
@@ -282,8 +289,17 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 		c.gridx = 3; 		
 		c.gridy = 8;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.ipadx = 20;
 		this.add(quitButton, c);
+		
+		c.gridx = 0; 		
+		c.gridy = 9;				
+		c.gridwidth = 5;	
+		c.gridheight = 3;
+		c.ipadx = 0;
+		c.insets.set(40, 20, 0, 0);
+		this.add(dp, c);
 	}			
 
 	public void actionPerformed(ActionEvent e) {
@@ -329,9 +345,9 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 
 					
 					System.out.println(outbound);
-					outbound = ls.conv.toHexString(ls.conv.fromBinaryString(outbound), " ", true);
+					outbound = conv.toHexString(conv.fromBinaryString(outbound), " ", true);
 					System.out.println(outbound);
-					
+										
 					ls.reader.setAutoMode(ls.reader.OFF);
 					ls.reader.setNotifyMode(ls.reader.OFF);
 					ls.reader.programTag(outbound);
@@ -377,7 +393,13 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 				exit();
 				nextState(sscc);
 			}
-		}		
+		}
+		
+		if(eSource == dp.previewButton){
+			String inbound = "urn:epc:tag:sgtin-96:" + filterText.getText() + "." + compPrefixText.getText()
+				+ "." +	itemRefText.getText() + "." + serialText.getText();
+			dp.preview(inbound);
+		}
 	}	
 
 	public void messageReceived(Message message){

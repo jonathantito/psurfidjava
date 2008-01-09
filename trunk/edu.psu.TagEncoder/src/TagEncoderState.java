@@ -3,6 +3,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.alien.enterpriseRFID.notify.MessageListener;
+import com.alien.enterpriseRFID.util.Converters;
 
 
 public abstract class TagEncoderState extends JPanel implements MessageListener{
@@ -13,6 +14,10 @@ public abstract class TagEncoderState extends JPanel implements MessageListener{
     public static SGTINState sgtin;
     public static GIDState gid;
     public static SSCCState sscc;
+    
+    protected static Converters conv = new Converters();
+    protected DisplayPanel dp = new DisplayPanel();
+    protected ProgrammingPanel pp = new ProgrammingPanel();
     
     public static TagEncoderState start(TagEncoder te, JFrame jf){
     	TagEncoderState.te = te;
