@@ -65,7 +65,6 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 	private ServerSocket srvr;
 	private Socket skt;	
 	protected Tag tagList[];
-	protected Converters conv = new Converters();
 
 	int readerPosition = 0;
 
@@ -171,7 +170,7 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 		}
 
 		if(eSource == scanButton){
-			loginButton.setEnabled(true);
+			//loginButton.setEnabled(true);
 			if(!scanning){
 				scanButton.setText("Stop Scan");
 				scanning = true;
@@ -188,7 +187,7 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 				ndls.stopService();
 				scanButton.setText("Start Scan");
 				scanning = false;
-				if(vrp.size() == 0) loginButton.setEnabled(true);
+				if(vrp.size() == 0) loginButton.setEnabled(false);
 			}
 		}
 
@@ -249,8 +248,8 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 				e1.printStackTrace();
 			} catch (InterruptedException e1) {
 				e1.printStackTrace();
-			}			
-			
+			}
+		
 			ndls.stopService();
 			scanning = false;
 			exit();
@@ -259,6 +258,7 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 	}
 
 	public void readerAdded(DiscoveryItem discoveryItem){
+		loginButton.setEnabled(true);
 		final String name = discoveryItem.getReaderName();
 		final String ip = discoveryItem.getReaderAddress();
 

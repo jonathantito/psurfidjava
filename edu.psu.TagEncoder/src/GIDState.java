@@ -25,8 +25,6 @@ import com.alien.enterpriseRFID.tags.Tag;
 public class GIDState extends TagEncoderState implements ActionListener{
 	static final long serialVersionUID = 1L;
 
-	private ProgrammingPanel pp = new ProgrammingPanel();
-
 	private JLabel headerLabel = new JLabel("Header:");
 	private JLabel genManagerLabel = new JLabel("General Manager #:");
 	private JLabel objClassLabel = new JLabel("Object Class:");
@@ -94,6 +92,7 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		helpButton.addActionListener(this);
 		quitButton.addActionListener(this);
 		pp.typeCombo.addActionListener(this);
+		dp.previewButton.addActionListener(this);
 
 		c.fill = GridBagConstraints.BOTH;
 
@@ -101,7 +100,7 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridy = 0;				
 		c.gridwidth = 4;	
 		c.gridheight = 2;		
-		c.insets = new Insets(30,0, 0, 0);
+		c.insets = new Insets(10 ,20, 0, 0);
 		pp.typeCombo.setSelectedItem("GID");
 		this.add(pp, c);
 
@@ -109,13 +108,14 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridy = 2;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
-		c.insets.set(10, 20, 0, 0);
+		c.insets.set(40, 20, 0, 0);
 		this.add(headerLabel, c);
 
 		c.gridx = 0; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
+		c.insets.set(10, 20, 0, 0);
 		this.add(genManagerLabel, c);
 
 		c.gridx = 0; 		
@@ -135,6 +135,7 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridy = 2;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
+		c.insets.set(40, 20, 0, 0);
 		headerText.setEnabled(false);
 		this.add(headerText, c);
 
@@ -142,6 +143,7 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridy = 3;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
+		c.insets.set(10, 20, 0, 0);
 		this.add(genManagerText, c);
 
 		c.gridx = 1; 		
@@ -159,13 +161,15 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridx = 2; 		
 		c.gridy = 2;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.insets.set(40, 20, 0, 0);
 		this.add(headerLabel2, c);
 
 		c.gridx = 2; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
+		c.insets.set(10, 20, 0, 0);
 		this.add(genManagerLabel2, c);
 
 		c.gridx = 2; 		
@@ -183,13 +187,15 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridx = 3; 		
 		c.gridy = 2;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;
+		c.insets.set(40, 20, 0, 0);
 		this.add(headerLabel3, c);
 
 		c.gridx = 3; 		
 		c.gridy = 3;				
 		c.gridwidth = 1;	
 		c.gridheight = 1;			
+		c.insets.set(10, 20, 0, 0);
 		this.add(genManagerLabel3, c);
 
 		c.gridx = 3; 		
@@ -225,8 +231,17 @@ public class GIDState extends TagEncoderState implements ActionListener{
 		c.gridx = 3; 		
 		c.gridy = 6;				
 		c.gridwidth = 1;	
-		c.gridheight = 1;			
+		c.gridheight = 1;		
+		c.ipadx = 20;
 		this.add(quitButton, c);
+		
+		c.gridx = 0; 		
+		c.gridy = 9;				
+		c.gridwidth = 5;	
+		c.gridheight = 3;
+		c.ipadx = 0;
+		c.insets.set(40, 20, 0, 0);
+		this.add(dp, c);
 	}			
 
 	public void actionPerformed(ActionEvent e) {
@@ -319,6 +334,12 @@ public class GIDState extends TagEncoderState implements ActionListener{
 				nextState(sscc);
 			}
 		}	
+		
+		if(eSource == dp.previewButton){
+			String inbound = "urn:epc:tag:gid-96:" + genManagerText.getText() + "." + objClassText.getText()
+			+ "." +	serialText.getText();
+			dp.preview(inbound);
+		}
 	}	
 
 	public void messageReceived(Message message){
