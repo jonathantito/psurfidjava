@@ -2,12 +2,6 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="Y:/RFID/Alien Code - New/Alien Java SDK v2.2.0 Jan-2007/jars/AlienRFID.jar"/>
-	<classpathentry kind="lib" path="Y:/RFID/Accada/tdt-0.3.0-bin-with-dependencies/tdt-0.3.0/lib/castor-0.9.9.1.jar"/>
-	<classpathentry kind="lib" path="Y:/RFID/Accada/tdt-0.3.0-bin-with-dependencies/tdt-0.3.0/lib/commons-logging-1.0.4.jar"/>
-	<classpathentry kind="lib" path="Y:/RFID/Accada/tdt-0.3.0-bin-with-dependencies/tdt-0.3.0/lib/xercesImpl-2.2.1.jar"/>
-	<classpathentry kind="lib" path="Y:/RFID/Accada/tdt-0.3.0-bin-with-dependencies/tdt-0.3.0/tdt-0.3.0.jar"/>
-	<classpathentry kind="lib" path="Y:/RFID/Accada/tdt-0.3.0-bin-with-dependencies/tdt-0.3.0/tdt-0.3.0-javadoc.jar"/>
-	<classpathentry kind="lib" path="Y:/RFID/Accada/tdt-0.3.0-bin-with-dependencies/tdt-0.3.0/tdt-0.3.0-sources.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tagEncoderJARS"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
