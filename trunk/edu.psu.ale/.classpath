@@ -2,6 +2,36 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/aleJARS"/>
+	<classpathentry kind="lib" path="aleJARS/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/aleclient.jar"/>
+	<classpathentry kind="lib" path="aleJARS/ale-wsdltypes.jar"/>
+	<classpathentry kind="lib" path="aleJARS/ant.jar"/>
+	<classpathentry kind="lib" path="aleJARS/commons-codec-1.3.jar"/>
+	<classpathentry kind="lib" path="aleJARS/commons-httpclient-3.0.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jaxb-api-2.0.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jaxb-impl-2.0.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jaxb-xjc-2.0.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jaxen-core.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jaxen-jdom.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jdom-1.2.jar"/>
+	<classpathentry kind="lib" path="aleJARS/jsr173_api-1.0.jar"/>
+	<classpathentry kind="lib" path="aleJARS/junit.jar"/>
+	<classpathentry kind="lib" path="aleJARS/log4j-1.2.13.jar"/>
+	<classpathentry kind="lib" path="aleJARS/mail.jar"/>
+	<classpathentry kind="lib" path="aleJARS/resolver.jar"/>
+	<classpathentry kind="lib" path="aleJARS/saxpath.jar"/>
+	<classpathentry kind="lib" path="aleJARS/spring-1.2.6.jar"/>
+	<classpathentry kind="lib" path="aleJARS/stax-api-1.0.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/wsdl4j-1.6.1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/wstx-asl-3.2.0.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xbean_xpath.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xbean.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xbean-2.2.0.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xbean-spring-2.8.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xfire-all-1.2.5.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xfire-jsr181-api-1.0-M1.jar"/>
+	<classpathentry kind="lib" path="aleJARS/xmlpublic.jar"/>
+	<classpathentry kind="lib" path="aleJARS/XmlSchema-1.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
