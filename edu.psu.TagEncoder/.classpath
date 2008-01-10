@@ -2,6 +2,12 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.USER_LIBRARY/tagEncoderJARS"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/AlienRFID.jar"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/castor-0.9.9.1.jar"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/commons-logging-1.0.4.jar"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/tdt-0.3.0.jar"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/tdt-0.3.0-javadoc.jar"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/tdt-0.3.0-sources.jar"/>
+	<classpathentry kind="lib" path="tagEncoderJARS/xercesImpl-2.2.1.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
