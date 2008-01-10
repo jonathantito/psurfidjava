@@ -22,6 +22,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.Border;
+import javax.swing.JOptionPane;
 
 import com.alien.enterpriseRFID.discovery.AlienDiscoverySocketException;
 import com.alien.enterpriseRFID.discovery.DiscoveryItem;
@@ -36,7 +37,6 @@ import com.alien.enterpriseRFID.reader.AlienReaderException;
 import com.alien.enterpriseRFID.reader.AlienReaderNotValidException;
 import com.alien.enterpriseRFID.reader.AlienReaderTimeoutException;
 import com.alien.enterpriseRFID.tags.Tag;
-import com.alien.enterpriseRFID.util.*;
 
 public class LoginState extends TagEncoderState implements ActionListener, DiscoveryListener {
 	static final long serialVersionUID = 1L;
@@ -180,7 +180,14 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 					ndls.setDiscoveryListener(this);
 					ndls.startService();
 				} catch (AlienDiscoverySocketException e1) {
-					e1.printStackTrace();
+					JOptionPane.showMessageDialog(this, 
+							"You have another reader discover application open!\nClose it please.",
+							"Error",
+							JOptionPane.ERROR_MESSAGE);
+					
+					ndls.stopService();
+					scanButton.setText("Start Scan");
+					scanning = false;							
 				}
 			}
 			else if(scanning){

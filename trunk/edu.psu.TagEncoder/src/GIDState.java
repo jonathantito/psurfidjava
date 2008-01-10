@@ -318,7 +318,17 @@ public class GIDState extends TagEncoderState implements ActionListener{
 
 		if(eSource == helpButton){
 			JOptionPane.showMessageDialog(this, 
-					"Help is coming!",
+					"Header: This value is chosen for you in order to\n" +
+					"		comply with EPCglobal Standards.\n" +
+					"\n" +
+					"General Manager #: The value must be 9 digits long.\n" +
+					"\n" +
+					"Object Class: The value must be 8 digits long.\n" +
+					"\n" +
+					"Serial: The value must be 9 digits long.\n" +
+					"\n" +
+					"More precise instructions can be found at\n" +
+					"		http://www.epcglobalinc.org/standards/tds/tds_1_3_1-standard-20070928.pdf",					
 					"Help",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
