@@ -376,7 +376,24 @@ public class SSCCState extends TagEncoderState implements ActionListener{
 
 		if(eSource == helpButton){
 			JOptionPane.showMessageDialog(this, 
-					"Help is coming!",
+					"Header: This value is chosen for you in order to\n" +
+					"		comply with EPCglobal Standards.\n" +
+					"\n" +
+					"Filter: Values are (1, 2, or 3). Please refer to the\n" +
+					"		Tag Data Standard (Table 5) for further\n" +
+					"		description.\n" +
+					"\n" +
+					"Partition: Values are (0-6).  The value + the number\n" +
+					"		of digits in the Company Prefix must equal 12.\n" +
+					"\n" +
+					"Company Prefix: Values are dependent on the Partition.\n" +
+					"\n" +
+					"Item Reference: The number of digits in the Company\n" +
+					"		Prefix + the number of digits in the Item\n" +
+					"		Reference must equal 17.\n" +
+					"\n" +
+					"More precise instructions can be found at\n" +
+					"		http://www.epcglobalinc.org/standards/tds/tds_1_3_1-standard-20070928.pdf",					
 					"Help",
 					JOptionPane.INFORMATION_MESSAGE);
 		}
