@@ -63,9 +63,9 @@ public class ReaderApplication implements MessageListener, DiscoveryListener {
 
 		if(cmd.equalsIgnoreCase("Connect")){
 			try {
-				InetAddress my_addr = InetAddress.getByName("127.0.0.5");
+				/*InetAddress my_addr = InetAddress.getByName("127.0.0.5");
 				ReaderApplication ra = new ReaderApplication(new InetSocketAddress(
-						my_addr, 20006));
+						my_addr, 20006));*/
 				
 				reader = new AlienClass1Reader();
 				//set the connection to the reader by retrieving the IP address 
@@ -76,8 +76,8 @@ public class ReaderApplication implements MessageListener, DiscoveryListener {
 				reader.setPassword("password");
 				reader.open();
 				
-				skt = ra.srvr.accept();
-				displayText("Server has accepted a connection!\n");
+				/*skt = ra.srvr.accept();
+				displayText("Server has accepted a connection!\n");*/
 
 				// use the function displayText(String); displaying which reader we are connected to
 				displayText("Connected to Reader: " + reader.getIPAddress() + " \n");
@@ -364,11 +364,11 @@ public class ReaderApplication implements MessageListener, DiscoveryListener {
 			ExecuteCommand("automode = off");
 			mls.stopService();
 			
-			try {
+			/*try {
 				skt.close();
 			} catch (IOException e) {
 				e.printStackTrace();
-			}
+			}*/
 			
 			reader.close();
 			System.exit(0);
