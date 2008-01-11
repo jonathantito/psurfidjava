@@ -17,7 +17,6 @@ public abstract class TagEncoderState extends JPanel implements MessageListener{
     
     protected static Converters conv = new Converters();
     protected DisplayPanel dp = new DisplayPanel();
-    protected ProgrammingPanel pp = new ProgrammingPanel();
     
     public static TagEncoderState start(TagEncoder te, JFrame jf){
     	TagEncoderState.te = te;

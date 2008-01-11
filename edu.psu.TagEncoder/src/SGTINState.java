@@ -24,6 +24,8 @@ import com.alien.enterpriseRFID.tags.Tag;
 
 public class SGTINState extends TagEncoderState implements ActionListener{
 	static final long serialVersionUID = 1L;
+	
+	private ProgrammingPanel pp = new ProgrammingPanel();
 
 	private JLabel headerLabel = new JLabel("Header:");
 	private JLabel filterLabel = new JLabel("Filter:");
@@ -362,6 +364,10 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 				} catch (TDTException e1) {
 					e1.printStackTrace();
 				} catch (AlienReaderException e1) {
+					JOptionPane.showMessageDialog(this,
+							"No Tag found.\nTry Again.", 
+							"Error", 
+							JOptionPane.ERROR_MESSAGE);
 					e1.printStackTrace();
 				}
 			}
@@ -422,7 +428,7 @@ public class SGTINState extends TagEncoderState implements ActionListener{
 
 	public void messageReceived(Message message){
 		ls.tagList = message.getTagList();
-
+		
 		if (message.getTagCount() == 0) {
 			pp.idLabel.setText("NULL");
 		} 

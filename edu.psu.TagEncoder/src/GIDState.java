@@ -25,6 +25,8 @@ import com.alien.enterpriseRFID.tags.Tag;
 public class GIDState extends TagEncoderState implements ActionListener{
 	static final long serialVersionUID = 1L;
 
+	private ProgrammingPanel pp = new ProgrammingPanel();
+	
 	private JLabel headerLabel = new JLabel("Header:");
 	private JLabel genManagerLabel = new JLabel("General Manager #:");
 	private JLabel objClassLabel = new JLabel("Object Class:");
