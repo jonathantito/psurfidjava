@@ -25,6 +25,8 @@ import com.alien.enterpriseRFID.tags.Tag;
 public class SSCCState extends TagEncoderState implements ActionListener{
 	static final long serialVersionUID = 1L;
 
+	private ProgrammingPanel pp = new ProgrammingPanel();
+	
 	private JLabel headerLabel = new JLabel("Header:");
 	private JLabel filterLabel = new JLabel("Filter:");
 	private JLabel partitionLabel = new JLabel("Partition:");

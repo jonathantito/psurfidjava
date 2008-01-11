@@ -217,7 +217,7 @@ public class LoginState extends TagEncoderState implements ActionListener, Disco
 				reader.setRFAttenuation(70);
 				reader.setTagType(16);
 				reader.setPersistTime(5);
-				reader.setAcquireMode("Inventory");
+				reader.setAcquireMode("Global Scroll");
 				reader.setReaderFunction(AlienClass1Reader.FUNCTION_PROGRAMMER);
 				reader.setAutoAction("Acquire");
 
