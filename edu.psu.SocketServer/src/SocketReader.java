@@ -44,11 +44,11 @@ public class SocketReader {
 		
 			is = skt.getInputStream();
 			os = skt.getOutputStream();	
-		do{
+		//do{
 			String result = ReportXMLParser.parse(is, os);
 			srf.MessageTextArea.setText(result);
 			System.out.println(result);
-		} while(sendReports);
+		//} while(sendReports);
 	}
 		
 	public void initializeSocket(){
