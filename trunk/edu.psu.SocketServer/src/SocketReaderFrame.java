@@ -23,7 +23,7 @@ public class SocketReaderFrame extends JFrame implements ActionListener{
 	JLabel portLabel = new JLabel("Port Number: ");
 
 	JTextField ipTextField = new JTextField("127.0.0.5");
-	JTextField portTextField = new JTextField("20004");
+	JTextField portTextField = new JTextField("20008");
 
 	JButton startButton = new JButton("Start");
 	JButton stopButton = new JButton("Stop");
