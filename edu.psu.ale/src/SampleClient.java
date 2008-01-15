@@ -8,9 +8,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 
 import com.logicalloy.ale.client.ALEClient;
-import com.logicalloy.ale.client.DuplicateNameExceptionResponse;
 import com.logicalloy.ale.client.DuplicateSubscriptionExceptionResponse;
-import com.logicalloy.ale.client.ECSpecValidationExceptionResponse;
 import com.logicalloy.ale.client.ImplementationExceptionResponse;
 import com.logicalloy.ale.client.InvalidURIExceptionResponse;
 import com.logicalloy.ale.client.NoSuchNameExceptionResponse;
@@ -35,27 +33,31 @@ public class SampleClient implements Runnable{
 	ServerSocket srvr;
 	Socket skt;
 	BufferedReader in = null;
+	SocketReaderFrame srf;
 
-	public SampleClient() {
+	public SampleClient(SocketReaderFrame srf) {
+		this.srf = srf;
 		ALEClient client = new ALEClient("http://localhost:8080/api/services/ALEService");
 
-		try {
+		Thread t = new Thread(this);			
+		t.start();
+		
+		/*try {
 			client.define("my ecspec", makeSpec());
 			client.subscribe("my ecspec", "file:///TestReport5.xml");
 			client.subscribe("my ecspec", "tcp://127.0.0.5:20004");		
 
-			Thread t = new Thread(this);			
-			t.start();
+			
 
 		} catch (DuplicateNameExceptionResponse e) {
+			e.printStackTrace();
+		} catch (ECSpecValidationExceptionResponse e) {
 			e.printStackTrace();
 		} catch (ImplementationExceptionResponse e) {
 			e.printStackTrace();
 		} catch (SecurityExceptionResponse e) {
 			e.printStackTrace();
-		} catch (ECSpecValidationExceptionResponse e) {
-			e.printStackTrace();
-		} catch (DuplicateSubscriptionExceptionResponse e) {
+		}  catch (DuplicateSubscriptionExceptionResponse e) {
 			e.printStackTrace();
 		} catch (InvalidURIExceptionResponse e) {
 			e.printStackTrace();
@@ -63,11 +65,7 @@ public class SampleClient implements Runnable{
 			e.printStackTrace();
 		} catch (Exception e){
 			e.printStackTrace();
-		}
-	}
-
-	public static void main(String[] args) throws Exception {
-		new SampleClient();
+		}*/
 	}
 
 	public void run(){
@@ -82,21 +80,23 @@ public class SampleClient implements Runnable{
 
 			try{
 				srvr = new ServerSocket();
-				srvr.bind(new InetSocketAddress(InetAddress.getByName("127.0.0.5"), 20004));
+				srvr.bind(new InetSocketAddress(InetAddress.getByName(srf.ipTextField.getText()),
+						Integer.parseInt(srf.portTextField.getText())));
 				skt = srvr.accept();
 				in = new BufferedReader(new InputStreamReader(skt.getInputStream()));
-				//parsedReport = ReportXMLParser.parse(skt.getInputStream());
-				
+				parsedReport = ReportXMLParser.parse(skt.getInputStream());
+
 				while(!eof){
 					line = in.readLine();
 					if(line != null)
 						report = report + line + "\n";
 					else
 						eof = true;
-
 				}
-				
-				System.out.println(report);
+
+				//System.out.println(report);\
+				System.out.println(parsedReport);
+				srf.MessageTextArea.setText(parsedReport);
 				skt.close();
 				srvr.close();
 

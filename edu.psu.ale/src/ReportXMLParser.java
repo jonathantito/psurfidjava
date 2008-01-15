@@ -32,9 +32,13 @@ public class ReportXMLParser {
 
 			// normalize text representation
 			doc.getDocumentElement().normalize();
-			System.out.println ("Root element of the doc is " + 
-					doc.getDocumentElement().getNodeName());
+			//System.out.println ("Root element of the doc is " + 
+				//	doc.getDocumentElement().getNodeName());
 
+			/*Element timeElement = doc.getElementById("ECReports");
+			String date = timeElement.getAttribute("date");
+			result = result + date + "\n\n";*/
+			
 			NodeList listOfMembers = doc.getElementsByTagName("member");
 			int totalMembers = listOfMembers.getLength();
 			System.out.println("Total no of members : " + totalMembers);
