@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="accadaJARS/activation-1.1.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/avalon-framework-4.1.3.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/axis-1.4.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/axis-jaxrpc-1.4.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/axis-saaj-1.4.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/axis-wsdl4j-1.5.1.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/commons-discovery-0.4.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/commons-logging-1.1.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-captureclient-0.2.2.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-captureclient-0.2.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-captureclient-0.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-commons-0.2.2.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-queryclient-0.2.2.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-queryclient-0.2.2-javadoc.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/epcis-queryclient-0.2.2-sources.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/log4j-1.2.12.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/logkit-1.0.1.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/mail-1.4.jar"/>
+	<classpathentry kind="lib" path="accadaJARS/servlet-api-2.3.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

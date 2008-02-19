@@ -1,0 +1,90 @@
+<ECReports totalMilliseconds="8047" terminationCondition="DURATION" ALEID="ALE2" xmlns="urn:epcglobal:ale:xsd:1" specName="my ecspec" date="2008-01-15T16:26:01.249-0500">
+   <ECSpec includeSpecInReports="true">
+      <logicalReaders>
+         <logicalReader>
+            IP
+         </logicalReader>
+      </logicalReaders>
+      <reportSpecs>
+         <reportSpec reportOnlyOnChange="false" reportName="Test Report" reportIfEmpty="true">
+            <output includeCount="true" includeRawDecimal="true" includeRawHex="true" includeEPC="true" includeTag="true"/>
+            <filterSpec>
+               <excludePattern>
+                  <excludePattern>
+                     urn:epc:pat:sgtin-96:*.*.*.*
+                  </excludePattern>
+               </excludePattern>
+               <includePattern/>
+            </filterSpec>
+            <reportSet set="CURRENT"/>
+            <groupSpec/>
+         </reportSpec>
+      </reportSpecs>
+      <boundarySpec>
+         <repeatPeriod unit="MS">
+            100
+         </repeatPeriod>
+         <stableSetInterval unit="MS">
+            8000
+         </stableSetInterval>
+         <duration unit="MS">
+            8000
+         </duration>
+      </boundarySpec>
+   </ECSpec>
+   <reports>
+      <report reportName="Test Report">
+         
+            <group>
+               <groupList>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.034000.10000000010</epc>
+                     <rawHex>urn:epc:raw:96.x3118213402540be40a000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15193936498409058159063728128</rawDecimal>
+                     <tag>urn:epc:id:sscc:034000.10000000010</tag>
+                  </member>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.614141.10000001001</epc>
+                     <rawHex>urn:epc:raw:96.x311a57bf42540be7e9000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15196611926547474658935963648</rawDecimal>
+                     <tag>urn:epc:id:sscc:614141.10000001001</tag>
+                  </member>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.051500.10000000012</epc>
+                     <rawHex>urn:epc:raw:96.x3118324b02540be40c000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15194017202914380638385602560</rawDecimal>
+                     <tag>urn:epc:id:sscc:051500.10000000012</tag>
+                  </member>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.041500.10000000011</epc>
+                     <rawHex>urn:epc:raw:96.x3118288702540be40b000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15193971086054196364489785344</rawDecimal>
+                     <tag>urn:epc:id:sscc:041500.10000000011</tag>
+                  </member>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.681131.10000000014</epc>
+                     <rawHex>urn:epc:raw:96.x311a992ac2540be40e000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15196920863393849093092540416</rawDecimal>
+                     <tag>urn:epc:id:sscc:681131.10000000014</tag>
+                  </member>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.093901.10000000015</epc>
+                     <rawHex>urn:epc:raw:96.x31185bb342540be40f000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15194212743013247978110451712</rawDecimal>
+                     <tag>urn:epc:id:sscc:093901.10000000015</tag>
+                  </member>
+                  <member logicalReader="IP" date="2008-01-15T16:25:56.000-0500">
+                     <epc>urn:epc:tag:sscc-96:0.027000.10000000013</epc>
+                     <rawHex>urn:epc:raw:96.x31181a5e02540be40d000000</rawHex>
+                     <rawDecimal>urn:epc:raw:96.15193904216606929167398731776</rawDecimal>
+                     <tag>urn:epc:id:sscc:027000.10000000013</tag>
+                  </member>
+               </groupList>
+               <groupCount>
+                  <count>7</count>
+               </groupCount>
+            </group>
+         
+      </report>
+   </reports>
+</ECReports>
