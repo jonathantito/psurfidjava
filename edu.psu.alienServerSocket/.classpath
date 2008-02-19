@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="Y:/RFID/Alien Code - New/Alien Java SDK v2.2.0 Jan-2007/jars/AlienRFID.jar"/>
+	<classpathentry kind="lib" path="Y:/RFID/Accada/epcis-captureclient-0.2.2-bin-with-dependencies/epcis-captureclient-0.2.2/epcis-captureclient-0.2.2.jar"/>
+	<classpathentry kind="lib" path="Y:/RFID/Accada/epcis-queryclient-0.2.2-bin-with-dependencies/epcis-queryclient-0.2.2/epcis-queryclient-0.2.2.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
