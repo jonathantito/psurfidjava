@@ -53,7 +53,7 @@ import edu.uark.csce.llrp.TagReportContentSelector;
  * 
  * @author Andreas Huebner - andreas@pramari.com
  * 
- */
+ */ 
 public class LLRPHelloWorldClient {
 
 	/*
