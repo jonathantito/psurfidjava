@@ -1,0 +1,564 @@
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493392527000"/>
+    </UTCTimestamp>
+    <ConnectionAttemptEvent>
+      <Status value="0"/>
+    </ConnectionAttemptEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="GetReaderCapabilitiesResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="Success"/>
+  </LLRPStatus>
+  <GeneralDeviceCapabilities>
+    <MaxNumberOfAntennaSupported value="1"/>
+    <CanSetAntennaProperties value="false"/>
+    <HasUTCClockCapability value="false"/>
+    <DeviceManufacturerName value="0"/>
+    <ModelName value="0"/>
+    <ReaderFirmwareVersion value="LLRP_Reader1.4"/>
+    <ReceiveSensitivityTableEntry>
+      <Index value="0"/>
+      <ReceiveSensitivityValue value="0"/>
+    </ReceiveSensitivityTableEntry>
+    <GPIOCapabilities>
+      <NumGPIs value="0"/>
+      <NumGPOs value="0"/>
+    </GPIOCapabilities>
+    <PerAntennaAirProtocol>
+      <AntennaID value="1"/>
+      <ProtocolElement value="1"/>
+    </PerAntennaAirProtocol>
+  </GeneralDeviceCapabilities>
+  <LLRPCapabilities>
+    <CanDoRFSurvey value="false"/>
+    <CanReportBufferFillWarning value="false"/>
+    <SupportsClientRequestOpSpec value="false"/>
+    <CanDoTagInventoryStateAwareSingulation value="false"/>
+    <SupportsEventAndReportHolding value="false"/>
+    <MaxPriorityLevelSupported value="0"/>
+    <ClientRequestOpSpecTimeout value="0"/>
+    <MaxNumROSpecs value="1"/>
+    <MaxNumSpecsPerROSpec value="1"/>
+    <MaxNumInventoryParameterSpecsPerAISpec value="0"/>
+    <MaxNumAccessSpecs value="0"/>
+    <MaxNumOpSpecsPerAccessSpec value="0"/>
+  </LLRPCapabilities>
+  <RegulatoryCapabilities>
+    <CountryCode value="0"/>
+    <CommunicationsStandard value="0"/>
+    <UHFBandCapabilities>
+      <TransmitPowerLevelTableEntry>
+        <Index value="0"/>
+        <TransmitPowerValue value="0"/>
+      </TransmitPowerLevelTableEntry>
+      <FrequencyInformation>
+        <Hopping value="false"/>
+        <FixedFrequencyTable>
+          <FrequencyElement value="0"/>
+        </FixedFrequencyTable>
+      </FrequencyInformation>
+      <UHFC1G2RFModeTable>
+        <UHFC1G2RFModeTableEntry>
+          <ModeID value="0"/>
+          <DRValue value="false"/>
+          <Conformance value="false"/>
+          <Mod value="0"/>
+          <FLM value="0"/>
+          <M value="0"/>
+          <BDRValue value="0"/>
+          <PIEValue value="0"/>
+          <MinTariValue value="0"/>
+          <MaxTariValue value="0"/>
+          <StepTariValue value="0"/>
+        </UHFC1G2RFModeTableEntry>
+      </UHFC1G2RFModeTable>
+    </UHFBandCapabilities>
+  </RegulatoryCapabilities>
+  <C1G2LLRPCapabilities>
+    <CanSupportBlockErase value="false"/>
+    <CanSupportBlockWrite value="false"/>
+    <MaxNumSelectFiltersPerQuery value="0"/>
+  </C1G2LLRPCapabilities>
+</Message>
+
+<Message type="SetReaderConfigResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="Sucess"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="GetReaderConfigResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="Success"/>
+  </LLRPStatus>
+  <Identification>
+    <IDType value="0"/>
+    <ReaderIDElement value="0"/>
+    <ReaderIDElement value="0"/>
+    <ReaderIDElement value="0"/>
+    <ReaderIDElement value="0"/>
+    <ReaderIDElement value="0"/>
+    <ReaderIDElement value="0"/>
+  </Identification>
+  <AntennaProperties>
+    <AntennaConnected value="true"/>
+    <AntennaId value="1"/>
+    <AntennaGain value="0"/>
+  </AntennaProperties>
+  <AntennaConfiguration>
+    <AntennaId value="1"/>
+    <RFReceiver>
+      <ReceiverSensitivity value="0"/>
+    </RFReceiver>
+    <RFTransmitter>
+      <HopTableId value="0"/>
+      <ChannelIndex value="0"/>
+      <TransmitPower value="0"/>
+    </RFTransmitter>
+  </AntennaConfiguration>
+  <ReaderEventNotificationSpec>
+    <EventNotificationState>
+      <EventType value="0"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="1"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="2"/>
+      <NotificationState value="true"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="3"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="4"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="5"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="6"/>
+      <NotificationState value="true"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="7"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+    <EventNotificationState>
+      <EventType value="8"/>
+      <NotificationState value="false"/>
+    </EventNotificationState>
+  </ReaderEventNotificationSpec>
+  <ROReportSpec>
+    <ROReportTrigger value="2"/>
+    <N value="0"/>
+    <TagReportContentSelector>
+      <EnableROSpecID value="true"/>
+      <EnableSpecIndex value="true"/>
+      <EnableInventoryParameterSpecID value="true"/>
+      <EnableAntennaID value="true"/>
+      <EnableChannelIndex value="true"/>
+      <EnablePeakRSSI value="true"/>
+      <EnableFirstSeenTimestamp value="true"/>
+      <EnableLastSeenTimestamp value="true"/>
+      <EnableTagSeenCount value="true"/>
+      <EnableAccessSpecID value="true"/>
+      <C1G2EPCMemorySelector>
+        <EnableCRC value="false"/>
+        <EnablePCBits value="false"/>
+      </C1G2EPCMemorySelector>
+    </TagReportContentSelector>
+  </ROReportSpec>
+  <AccessReportSpec>
+    <AccessReportTrigger value="0"/>
+  </AccessReportSpec>
+  <LLRPConfigurationStateValue>
+    <LLRPConfigurationStateValue value="52"/>
+  </LLRPConfigurationStateValue>
+  <KeepaliveSpec>
+    <KeepaliveTriggerType value="0"/>
+    <TimeInterval value="0"/>
+  </KeepaliveSpec>
+  <EventsAndReports>
+    <HoldEventsAndReportsUponReconnect value="false"/>
+  </EventsAndReports>
+</Message>
+
+<Message type="AddROSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="ROSPec successfully added"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="GetROSpecsResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="sucess"/>
+  </LLRPStatus>
+  <ROSpec>
+    <ROSpecID value="1"/>
+    <Priority value="0"/>
+    <CurrentState value="0"/>
+    <ROBoundarySpec>
+      <ROSpecStartTrigger>
+        <ROSpecStartTriggerType value="0"/>
+      </ROSpecStartTrigger>
+      <ROSpecStopTrigger>
+        <ROSpecStopTriggerType value="1"/>
+        <DurationTriggerValue value="5000"/>
+      </ROSpecStopTrigger>
+    </ROBoundarySpec>
+    <AISpec>
+      <AntennaElement value="1"/>
+      <AISpecStopTrigger>
+        <AISpecStopTriggerType value="0"/>
+        <DurationTrigger value="0"/>
+      </AISpecStopTrigger>
+      <InventoryParameterSpec>
+        <InventoryParameterSpecID value="1"/>
+        <ProtocolID value="1"/>
+      </InventoryParameterSpec>
+    </AISpec>
+  </ROSpec>
+</Message>
+
+<Message type="EnableROSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="ROSPec was successfully enabled"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="StartROSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="ROSPec was successfully started"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493393027000"/>
+    </UTCTimestamp>
+    <ROSpecEvent>
+      <EventType value="0"/>
+      <ROSpecID value="1"/>
+      <PreemptingROSpecID value="0"/>
+    </ROSpecEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493398355000"/>
+    </UTCTimestamp>
+    <AISpecEvent>
+      <EventType value="0"/>
+      <ROSpecID value="1"/>
+      <SpecIndex value="0"/>
+    </AISpecEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="ROAccessReport">
+  <TagReportData>
+    <EPC96>
+      <EPC value="01 02 03 04 05 06 07 08 09 0A 0B 0C "/>
+    </EPC96>
+    <ROSpecID>
+      <ROSpecID value="1"/>
+    </ROSpecID>
+    <SpecIndex>
+      <SpecIndex value="0"/>
+    </SpecIndex>
+    <InventoryParameterSpecID>
+      <InventoryParamSpecID value="0"/>
+    </InventoryParameterSpecID>
+    <AntennaID>
+      <AntennaID value="1"/>
+    </AntennaID>
+    <PeakRSSI>
+      <PeakRSSI value="0"/>
+    </PeakRSSI>
+    <ChannelIndex>
+      <ChannelIndex value="0"/>
+    </ChannelIndex>
+    <FirstSeenTimestampUTC>
+      <Microseconds value="1209491040355000"/>
+    </FirstSeenTimestampUTC>
+    <LastSeenTimestampUTC>
+      <Microseconds value="1209493393027000"/>
+    </LastSeenTimestampUTC>
+    <TagSeenCount>
+      <TagCount value="28"/>
+    </TagSeenCount>
+  </TagReportData>
+  <TagReportData>
+    <EPC96>
+      <EPC value="30 50 92 BE A0 08 83 4D BB 3E CD 8E "/>
+    </EPC96>
+    <ROSpecID>
+      <ROSpecID value="1"/>
+    </ROSpecID>
+    <SpecIndex>
+      <SpecIndex value="0"/>
+    </SpecIndex>
+    <InventoryParameterSpecID>
+      <InventoryParamSpecID value="0"/>
+    </InventoryParameterSpecID>
+    <AntennaID>
+      <AntennaID value="1"/>
+    </AntennaID>
+    <PeakRSSI>
+      <PeakRSSI value="0"/>
+    </PeakRSSI>
+    <ChannelIndex>
+      <ChannelIndex value="0"/>
+    </ChannelIndex>
+    <FirstSeenTimestampUTC>
+      <Microseconds value="1209491040355000"/>
+    </FirstSeenTimestampUTC>
+    <LastSeenTimestampUTC>
+      <Microseconds value="1209493393027000"/>
+    </LastSeenTimestampUTC>
+    <TagSeenCount>
+      <TagCount value="28"/>
+    </TagSeenCount>
+  </TagReportData>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493398355000"/>
+    </UTCTimestamp>
+    <ROSpecEvent>
+      <EventType value="1"/>
+      <ROSpecID value="1"/>
+      <PreemptingROSpecID value="0"/>
+    </ROSpecEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="AddAccessSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="Success"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="GetAccessSpecsResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="Success"/>
+  </LLRPStatus>
+  <AccessSpec>
+    <AccessSpecID value="2"/>
+    <AntennaId value="0"/>
+    <ProtocolId value="1"/>
+    <CurrentState value="false"/>
+    <ROSpecID value="0"/>
+    <AccessSpecStopTrigger>
+      <AccessSpecStopTrigger value="1"/>
+      <OperationCountValue value="1"/>
+    </AccessSpecStopTrigger>
+    <AccessCommand>
+      <C1G2TagSpec>
+        <C1G2TargetTag>
+          <MB value="2"/>
+          <Match value="true"/>
+          <Pointer value="3"/>
+          <Mask value=""/>
+          <Data value=""/>
+        </C1G2TargetTag>
+      </C1G2TagSpec>
+      <C1G2Write>
+        <OpSpecID value="2"/>
+        <AccessPassword value="0"/>
+        <MB value="1"/>
+        <WordPointer value="2"/>
+        <WriteDataElement value="258"/>
+        <WriteDataElement value="772"/>
+        <WriteDataElement value="1286"/>
+        <WriteDataElement value="1800"/>
+        <WriteDataElement value="2314"/>
+        <WriteDataElement value="2828"/>
+      </C1G2Write>
+    </AccessCommand>
+  </AccessSpec>
+</Message>
+
+<Message type="EnableAccessSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="Success"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="StartROSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="ROSPec was successfully started"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493400636000"/>
+    </UTCTimestamp>
+    <ROSpecEvent>
+      <EventType value="0"/>
+      <ROSpecID value="1"/>
+      <PreemptingROSpecID value="0"/>
+    </ROSpecEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493406090000"/>
+    </UTCTimestamp>
+    <AISpecEvent>
+      <EventType value="0"/>
+      <ROSpecID value="1"/>
+      <SpecIndex value="0"/>
+    </AISpecEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="ROAccessReport">
+  <TagReportData>
+    <EPC96>
+      <EPC value="01 02 03 04 05 06 07 08 09 0A 0B 0C "/>
+    </EPC96>
+    <ROSpecID>
+      <ROSpecID value="1"/>
+    </ROSpecID>
+    <SpecIndex>
+      <SpecIndex value="0"/>
+    </SpecIndex>
+    <InventoryParameterSpecID>
+      <InventoryParamSpecID value="0"/>
+    </InventoryParameterSpecID>
+    <AntennaID>
+      <AntennaID value="1"/>
+    </AntennaID>
+    <PeakRSSI>
+      <PeakRSSI value="0"/>
+    </PeakRSSI>
+    <ChannelIndex>
+      <ChannelIndex value="0"/>
+    </ChannelIndex>
+    <FirstSeenTimestampUTC>
+      <Microseconds value="1209491040355000"/>
+    </FirstSeenTimestampUTC>
+    <LastSeenTimestampUTC>
+      <Microseconds value="1209493400636000"/>
+    </LastSeenTimestampUTC>
+    <TagSeenCount>
+      <TagCount value="29"/>
+    </TagSeenCount>
+    <AccessSpecID>
+      <AccessSpecID value="2"/>
+    </AccessSpecID>
+    <C1G2WriteOpSpecResult>
+      <Result value="0"/>
+      <OpSpecID value="2"/>
+      <NumWordsWritten value="6"/>
+    </C1G2WriteOpSpecResult>
+  </TagReportData>
+  <TagReportData>
+    <EPC96>
+      <EPC value="30 50 92 BE A0 08 83 4D BB 3E CD 8E "/>
+    </EPC96>
+    <ROSpecID>
+      <ROSpecID value="1"/>
+    </ROSpecID>
+    <SpecIndex>
+      <SpecIndex value="0"/>
+    </SpecIndex>
+    <InventoryParameterSpecID>
+      <InventoryParamSpecID value="0"/>
+    </InventoryParameterSpecID>
+    <AntennaID>
+      <AntennaID value="1"/>
+    </AntennaID>
+    <PeakRSSI>
+      <PeakRSSI value="0"/>
+    </PeakRSSI>
+    <ChannelIndex>
+      <ChannelIndex value="0"/>
+    </ChannelIndex>
+    <FirstSeenTimestampUTC>
+      <Microseconds value="1209491040355000"/>
+    </FirstSeenTimestampUTC>
+    <LastSeenTimestampUTC>
+      <Microseconds value="1209493400636000"/>
+    </LastSeenTimestampUTC>
+    <TagSeenCount>
+      <TagCount value="29"/>
+    </TagSeenCount>
+  </TagReportData>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="1209493406090000"/>
+    </UTCTimestamp>
+    <ROSpecEvent>
+      <EventType value="1"/>
+      <ROSpecID value="1"/>
+      <PreemptingROSpecID value="0"/>
+    </ROSpecEvent>
+  </ReaderEventNotificationData>
+</Message>
+
+<Message type="DisableROSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="ROSpec was sucessfully disabled"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="DeleteROSpecResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value="ROSpec was sucessfully deleted"/>
+  </LLRPStatus>
+</Message>
+
+<Message type="CloseConnectionResponse">
+  <LLRPStatus>
+    <ErrorCode value="0"/>
+    <ErrorDescription value=""/>
+  </LLRPStatus>
+</Message>
+
+<Message type="ReaderEventNotification">
+  <ReaderEventNotificationData>
+    <UTCTimestamp>
+      <Microseconds value="0"/>
+    </UTCTimestamp>
+    <ConnectionCloseEvent>
+    </ConnectionCloseEvent>
+  </ReaderEventNotificationData>
+</Message>
+

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/javaws.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/jce.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/jsse.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/llrp.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/plugin.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/rt.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/charsets.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/comm.jar"/>
+	<classpathentry kind="lib" path="W:/labsoftware/Java/jre1.5.0_09/lib/deploy.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
