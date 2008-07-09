@@ -44,33 +44,33 @@ public class InputThread extends Thread{
 				String hexID = msg.substring(10, 34);
 				
 				if(hexID.substring(0, 2).equalsIgnoreCase("32")){	
-					System.out.println("Location Tag!");
 					for(int i = 0; i < locationVec.size(); i++)
-						if(hexID.equals(locationVec.elementAt(i)))
+						if(hexID.equals(locationVec.elementAt(i).hexID))
 							currentLoc = locationVec.elementAt(i).name;
 				}
 				else if(hexID.substring(0, 2).equalsIgnoreCase("31")){
-					System.out.println("Pallet Tag!");
 					boolean palletFound = false;
 					
 					for(int i = 0; i < palletVec.size(); i++){
-						if(hexID.equals(palletVec.elementAt(i))){
+						if(hexID.equals(palletVec.elementAt(i).hexID)){
 							palletVec.elementAt(i).location = currentLoc;
+							
+							if(!palletVec.elementAt(i).path.lastElement().equalsIgnoreCase(currentLoc)){
+								palletVec.elementAt(i).path.addElement(currentLoc);
+								updatePalletList("Pallets.txt");
+							}
 							palletFound = true;
 						}
 					}
 					
 					if(!palletFound){
-						palletVec.addElement(new Pallet(hexID, currentLoc));
+						palletVec.addElement(new Pallet(hexID, currentLoc, currentLoc));
 						updatePalletList("Pallets.txt");
-						System.out.println("Pallet List updated!");
 					}
 				}
 				else
 					System.out.println("Unknown Tag");
-				
-				
-				//System.out.println(hexID.substring(0, 2));					
+													
 				srf.MessageTextArea.setText(msg);
 			}
 		}
@@ -101,13 +101,19 @@ public class InputThread extends Thread{
 		try {
 	        BufferedReader in = new BufferedReader(new FileReader(new File(file)));
 	        String[] str;	        
+	        String[] p;
 	        
 	        int numPallets = Integer.parseInt(in.readLine());
 	        
 		    if(numPallets != 0)    
 	        	for(int i = 0; i < numPallets; i++){
 		        	str = in.readLine().split("\t");
-		            palletVec.addElement(new Pallet(str[0],str[1]));
+		        	p = str[2].split(">");
+		        	String path = "";
+		        	for(int j = 0; j < p.length; j++)
+		        		path += p[i] + ">";
+		        	
+		        	palletVec.addElement(new Pallet(str[0],str[1], path));
 		        }
 	        
 		    in.close();
@@ -121,8 +127,14 @@ public class InputThread extends Thread{
 	        BufferedWriter out = new BufferedWriter(new FileWriter(file));
 	        String palletList = "" + palletVec.size() + "\n";
 	        
-	        for(int i = 0; i < palletVec.size(); i++)
-	        	palletList += palletVec.elementAt(i).hexID + "\t" + palletVec.elementAt(i).location + "\n";
+	        for(int i = 0; i < palletVec.size(); i++){
+	        	palletList += palletVec.elementAt(i).hexID + "\t" + palletVec.elementAt(i).location + "\t";
+	        	
+	        	for(int j = 0; j < palletVec.elementAt(i).path.size(); j++)
+	        		palletList += palletVec.elementAt(i).path.elementAt(j) + ">";
+	        	
+	        	palletList += "\n";
+	        }        
 	        
 	        out.write(palletList);
 	        out.close();
