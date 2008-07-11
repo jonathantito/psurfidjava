@@ -18,6 +18,7 @@ public class InputThread extends Thread{
 	Vector<Location> locationVec;
 	Vector<Pallet> palletVec;
 	String currentLoc;
+	Connection wmsConnection;
 
 	public InputThread(Socket s, SocketReaderFrame srf) {
 		this.s = s;
@@ -29,7 +30,7 @@ public class InputThread extends Thread{
 		fillPalletVector("Pallets.txt");
 
 		try {
-			createConnection();
+			wmsConnection = createConnection();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -85,7 +86,7 @@ public class InputThread extends Thread{
 				else
 					System.out.println("Unknown Tag");
 
-				srf.MessageTextArea.setText(msg);
+				//srf.MessageTextArea.setText(msg);
 			}
 		}
 		catch (IOException ex) {
@@ -156,7 +157,7 @@ public class InputThread extends Thread{
 		}
 	}
 
-	public void createConnection() throws Exception {
+	public Connection createConnection() throws Exception {
 		Connection connection = null;
 		try {
 			// Load the JDBC driver
@@ -170,19 +171,12 @@ public class InputThread extends Thread{
 			String username = "root";
 			String password = "";
 			connection = DriverManager.getConnection(url, username, password);
+			
 		} catch (ClassNotFoundException e) {
 			// Could not find the database driver
 		} catch (SQLException e) {
 			// Could not connect to the database
 		} 
-
-		/*String driver = "sun.jdbc.odbc.JdbcOdbcDriver";
-        String url = "jdbc:odbc:localhost:3306/wms";
-        String username = "root";
-        String password = "";
-        Class.forName(driver);
-        Connection conn = DriverManager.getConnection(url, username, password);
-        System.out.println("Connected To Access");
-        conn.close();*/
+		return connection;
 	}
 }
