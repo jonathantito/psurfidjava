@@ -7,9 +7,9 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.Socket;
-import java.sql.Connection;
-import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 
 public class InputThread extends Thread{
@@ -18,28 +18,22 @@ public class InputThread extends Thread{
 	Vector<Location> locationVec;
 	Vector<Pallet> palletVec;
 	String currentLoc;
-	Connection wmsConnection;
-
+	
 	public InputThread(Socket s, SocketReaderFrame srf) {
 		this.s = s;
 		this.srf = srf;
 		currentLoc = "Unknown";
 		locationVec = new Vector<Location>();
 		palletVec = new Vector<Pallet>();
-		fillLocationVector("Locations.txt");
-		fillPalletVector("Pallets.txt");
-
+		
 		try {
-			wmsConnection = createConnection();
-		} catch (Exception e) {
+			Statement st = srf.wmsConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT * FROM TAGS");
+			//rs.
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
-		//print off all locations and pallets in inventory
-		for(int i = 0; i < locationVec.size(); i++)
-			System.out.println(locationVec.elementAt(i).hexID + " " + locationVec.elementAt(i).name);
-		for(int i = 0; i < palletVec.size(); i++)
-			System.out.println(palletVec.elementAt(i).hexID + " " + palletVec.elementAt(i).location);
+		
 	}
 	public void run(){
 		try {
@@ -83,10 +77,6 @@ public class InputThread extends Thread{
 						updatePalletList("Pallets.txt");
 					}
 				}
-				else
-					System.out.println("Unknown Tag");
-
-				//srf.MessageTextArea.setText(msg);
 			}
 		}
 		catch (IOException ex) {
@@ -155,28 +145,5 @@ public class InputThread extends Thread{
 			out.close();
 		} catch (IOException e) {
 		}
-	}
-
-	public Connection createConnection() throws Exception {
-		Connection connection = null;
-		try {
-			// Load the JDBC driver
-			String driverName = "org.gjt.mm.mysql.Driver"; // MySQL MM JDBC driver
-			Class.forName(driverName);
-
-			// Create a connection to the database
-			String serverName = "localhost:3306";
-			String mydatabase = "wms";
-			String url = "jdbc:mysql://" + serverName + "/" + mydatabase; // a JDBC url
-			String username = "root";
-			String password = "";
-			connection = DriverManager.getConnection(url, username, password);
-			
-		} catch (ClassNotFoundException e) {
-			// Could not find the database driver
-		} catch (SQLException e) {
-			// Could not connect to the database
-		} 
-		return connection;
 	}
 }
