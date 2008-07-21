@@ -18,22 +18,13 @@ public class InputThread extends Thread{
 	Vector<Location> locationVec;
 	Vector<Pallet> palletVec;
 	String currentLoc;
-	
+
 	public InputThread(Socket s, SocketReaderFrame srf) {
 		this.s = s;
 		this.srf = srf;
 		currentLoc = "Unknown";
 		locationVec = new Vector<Location>();
-		palletVec = new Vector<Pallet>();
-		
-		try {
-			Statement st = srf.wmsConnection.createStatement();
-			ResultSet rs = st.executeQuery("SELECT * FROM TAGS");
-			//rs.
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
+		palletVec = new Vector<Pallet>();	
 	}
 	public void run(){
 		try {
@@ -49,16 +40,54 @@ public class InputThread extends Thread{
 
 				String hexID = msg.substring(10, 34);
 
-				//if tag is a location, traverse location vector until found
-				//	if found update location, ow ignore
+				//location tag
 				if(hexID.substring(0, 2).equalsIgnoreCase("32")){	
-					for(int i = 0; i < locationVec.size(); i++)
-						if(hexID.equals(locationVec.elementAt(i).hexID))
-							currentLoc = locationVec.elementAt(i).name;
+					try {
+						Statement st = srf.wmsConnection.createStatement();
+						ResultSet rs = st.executeQuery("SELECT LOCHEXID FROM LOCATIONS " +
+								"WHERE LOCHEXID = \"" + hexID + "\"");
+
+						while(rs.next()){
+							String result = rs.getString(1);
+							if(hexID.equalsIgnoreCase(result))
+								currentLoc = hexID;								
+						}
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
 				}
 				//pallet tag
 				else if(hexID.substring(0, 2).equalsIgnoreCase("31")){
-					boolean palletFound = false;
+					System.out.println(currentLoc);
+					if(!currentLoc.equalsIgnoreCase("Unknown")){
+						try {
+							Statement st = srf.wmsConnection.createStatement();
+							ResultSet rs = st.executeQuery("SELECT TAGHEXID FROM TAGS");
+
+							while(rs.next()){
+								String result = rs.getString(1);
+								if(hexID.equalsIgnoreCase(result)){//found tag in table
+									Statement st1 = srf.wmsConnection.createStatement();
+									String cmd = "SELECT Desc FROM Locations WHERE LocHexID = \"" 
+										+ currentLoc + "\""; 
+									System.out.println(cmd);
+									ResultSet rs1 = st1.executeQuery(cmd);
+
+									cmd = "UPDATE taglocations " +
+									"SET LOCHEXID = \"" + currentLoc + 
+									"\", LOCDESCRIPTION = \"" + rs1.getString(1) + 
+									"\"WHERE TAGHEXID = \"" + hexID + "\"";								
+
+									System.out.println(cmd);
+									st1.executeUpdate(cmd);
+								}
+							}
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+					}
+
+					/*boolean palletFound = false;
 
 					for(int i = 0; i < palletVec.size(); i++){
 						if(hexID.equals(palletVec.elementAt(i).hexID)){
@@ -75,7 +104,7 @@ public class InputThread extends Thread{
 					if(!palletFound){
 						palletVec.addElement(new Pallet(hexID, currentLoc, currentLoc));
 						updatePalletList("Pallets.txt");
-					}
+					}*/
 				}
 			}
 		}
@@ -83,22 +112,17 @@ public class InputThread extends Thread{
 		}
 	}
 
-	public void fillLocationVector(String file){
+	public void fillLocationVector(){
 		try {
-			BufferedReader in = new BufferedReader(new FileReader(new File(file)));
-			String[] str;	        
+			Statement st = srf.wmsConnection.createStatement();
+			ResultSet rs = st.executeQuery("SELECT DISTINT LOCHEXID FROM LOCATIONS");
 
-			int numLocations = Integer.parseInt(in.readLine());
+			while(rs.next()){
+				//locationVec.addElement(obj)
+			}
 
-			if(numLocations != 0)
-				for(int i = 0; i < numLocations; i++){
-					str = in.readLine().split("\t");
-					locationVec.addElement(new Location(str[0],str[1]));
-				}
-
-			in.close();
-		} catch (IOException e) {
-			System.out.println("Error Reading from location file!");
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 	}
 
