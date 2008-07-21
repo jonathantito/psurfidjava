@@ -11,8 +11,12 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -22,9 +26,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.border.Border;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 
 
-public class QueryClient extends JFrame implements ActionListener{
+public class QueryClient extends JFrame implements ActionListener, ListSelectionListener{
 
 	static final long serialVersionUID = 1L;
 
@@ -36,8 +44,10 @@ public class QueryClient extends JFrame implements ActionListener{
 	JButton queryButton = new JButton("Query");
 	JButton exitButton = new JButton("Exit");
 	
-	JList asnList = new JList();
-	JList tagList = new JList();
+	DefaultListModel asnModel = new DefaultListModel();
+	DefaultListModel tagModel = new DefaultListModel();
+	JList asnList = new JList(asnModel);
+	JList tagList = new JList(tagModel);
 		
 	JTextArea asnInfoTextArea = new JTextArea();
 	JTextArea tagInfoTextArea = new JTextArea();
@@ -50,12 +60,14 @@ public class QueryClient extends JFrame implements ActionListener{
 	GridBagLayout gbl = new GridBagLayout();
 	
 	Connection wmsConnection;
+	int quickfix = 0;
 	
 	public QueryClient(Connection wmsConnection){
 		this.wmsConnection = wmsConnection;
 		enableEvents(AWTEvent.WINDOW_EVENT_MASK);
 		try {
 			initFrame();
+			fillASNList();
 		}
 		catch(Exception e) {
 			System.out.println("Form not created");
@@ -90,7 +102,9 @@ public class QueryClient extends JFrame implements ActionListener{
 
 		exitButton.addActionListener(this);
 		importASNButton.addActionListener(this);
-		queryButton.addActionListener(this);		
+		queryButton.addActionListener(this);
+		asnList.addListSelectionListener(this);
+		tagList.addListSelectionListener(this);
 		
 		GridBagConstraints c = new GridBagConstraints();
 		c.fill = GridBagConstraints.BOTH;
@@ -177,6 +191,51 @@ public class QueryClient extends JFrame implements ActionListener{
 		this.validate();		
 	}
 	
+	public void valueChanged(ListSelectionEvent e){
+		Object eSource = e.getSource();
+		
+		if(quickfix == 0){
+			if(eSource == asnList){
+				String selection = asnList.getSelectedValue().toString();
+				
+				int asnID = Integer.parseInt(selection.substring(0, selection.indexOf(" ")));
+				
+				try {
+					Statement st = wmsConnection.createStatement();
+					String cmd = "SELECT * FROM ASN WHERE ASNID = " + asnID; 				
+					ResultSet rs = st.executeQuery(cmd);
+					while(rs.next()){
+						String result = "";
+						result += "ASN ID:\n\t" + rs.getString(1) + "\n";
+						result += "Company Name:\n\t" + rs.getString(2) + "\n";
+						result += "Date:\n\t" + rs.getString(3) + "\n";
+						result += "Time:\n\t" + rs.getString(4) + "\n";
+						result += "Desc:\n\t" + rs.getString(5) + "\n";
+						asnInfoTextArea.setText(result);
+					}
+					
+					cmd = "SELECT * FROM TAGS WHERE TAGASNID = " + asnID; 				
+					rs = st.executeQuery(cmd);
+					while(rs.next()){
+						String result = "";
+						result += rs.getString(1) + "   " + rs.getString(5);
+						tagModel.insertElementAt(result, 0);
+					}
+					
+				} catch (SQLException e1) {
+					e1.printStackTrace();
+				}
+				
+				quickfix = 1;
+			}
+			if(eSource == tagList){
+				quickfix = 1;
+			}
+		}
+		else
+			quickfix = 0;
+	}
+	
 	public void actionPerformed(ActionEvent e){
 		Object eSource = e.getSource();
 		
@@ -184,33 +243,53 @@ public class QueryClient extends JFrame implements ActionListener{
 			JFileChooser chooser = new JFileChooser();
 			chooser.showOpenDialog(this);
             String file = chooser.getSelectedFile().getPath();
-            System.out.println(file);
             
             try {
     			BufferedReader in = new BufferedReader(new FileReader(new File(file)));
     			String[] str;	        
-    			String[] p;
-
     			str = in.readLine().split("\t");
-    			System.out.println(str[0]);
-    			/*if(numPallets != 0)    
-    				for(int i = 0; i < numPallets; i++){
-    					str = in.readLine().split("\t");
-    					p = str[2].split(">");
-    					String path = "";
-    					for(int j = 0; j < p.length; j++)
-    						path += p[j] + ">";
-
-    					palletVec.addElement(new Pallet(str[0],str[1], path));
-    				}*/
+    			
+    			try {
+    				// Add asn to database and to asn list
+					Statement st = wmsConnection.createStatement();
+					String cmd = "INSERT into ASN " + 
+						"VALUES(" + str[0] + ",\"" + str[1] + "\",CURDATE(), CURTIME(),\"" + str[2] +"\")";
+					int x = st.executeUpdate(cmd);
+					
+					cmd = "SELECT * FROM ASN WHERE ASNID = " + str[0];
+					ResultSet rs = st.executeQuery(cmd);
+					
+					while(rs.next()){
+						String result = "";
+						result += rs.getString(1) + "   " + rs.getString(2) + "   " + rs.getString(3);
+						System.out.println(result);
+						asnModel.insertElementAt(result, 0);
+					}
+					
+					// add Tags from asn to database
+					in.readLine();
+					String[] tags;
+					for(int i = 0; i < Integer.parseInt(str[3]); i++){
+						tags = in.readLine().split("\t");
+						cmd = "INSERT into TAGS " +
+							"VALUES(\"" + tags[0] + "\",\"" + str[0] + "\", '', '',\"" 
+							+ tags[1] + "\", CURDATE(), 0000-00-00)";
+						//tagInfoTextArea.append(cmd + "\n");
+						
+						st.executeUpdate(cmd);
+					}
+					
+					
+				} catch (MySQLIntegrityConstraintViolationException e1){
+					JOptionPane.showMessageDialog(this, "ASN is already in the Table!!");
+            	} catch (SQLException e2) {
+					e2.printStackTrace();
+				}
 
     			in.close();
     		} catch (IOException e1) {
-    			e1.printStackTrace();
-    			
     			System.out.println("Error Reading from asn file!");
     		}
-
 		}
 		
 		if(eSource == queryButton){
@@ -219,6 +298,24 @@ public class QueryClient extends JFrame implements ActionListener{
 		
 		if(eSource == exitButton){
 			System.exit(0);
+		}
+	}
+	
+	public void fillASNList(){
+		try {
+			Statement st = wmsConnection.createStatement();
+			String cmd = "SELECT * FROM ASN";
+			ResultSet rs = st.executeQuery(cmd);
+			
+			while(rs.next()){
+				String result = "";
+				result += rs.getString(1) + "   " + rs.getString(2) + "   " + rs.getString(3);
+				asnModel.insertElementAt(result, 0);
+			}			
+		} catch (MySQLIntegrityConstraintViolationException e1){
+			JOptionPane.showMessageDialog(this, "ASN is already in the Table!!");
+    	} catch (SQLException e2) {
+			e2.printStackTrace();
 		}
 	}
 }
