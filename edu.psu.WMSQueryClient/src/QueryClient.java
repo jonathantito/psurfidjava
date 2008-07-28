@@ -10,11 +10,9 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Time;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -220,7 +218,7 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 					tagModel.removeAllElements();
 					while(rs.next()){
 						String result = "";
-						result += rs.getString(1) + "   " + rs.getString(5);
+						result += rs.getString(1) + "   " + rs.getString(3);
 						tagModel.insertElementAt(result, 0);
 					}
 
@@ -241,11 +239,35 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 					while(rs.next()){
 						String result = "";
 						result += "Hex ID:\n\t" + rs.getString(1) + "\n";
-						result += "Location:\n\t" + rs.getString(3) + "\n";
-						result += "Path:\n\t" + rs.getString(4) + "\n";
-						result += "Desc:\n\t" + rs.getString(5) + "\n";
-						result += "Shipping Date:\n\t" + rs.getString(6) + "\n";
-						result += "Arrival Date:\n\t" + rs.getDate(7) + "\n";
+						result += "Desc:\n\t" + rs.getString(3) + "\n";
+						
+						Statement st1 = wmsConnection.createStatement();
+						ResultSet rs1;
+						cmd = "SELECT * FROM LOCATIONS WHERE LOCHEXID = \"" + rs.getString(4) + "\"";
+						rs1 = st1.executeQuery(cmd);
+						result += "Location:\n";
+						while(rs1.next()){
+							result += "\t" + rs1.getString(2);
+						}
+						
+						cmd = "SELECT * FROM ASN WHERE ASNID = \"" + rs.getString(2) + "\""; 				
+						rs1 = st1.executeQuery(cmd);
+						while(rs1.next()){
+							result += "\nShipped Date:\n\t" + rs1.getString(3) 
+									+ " " + rs1.getString(4) + "\n";
+						}
+					
+						cmd = "SELECT * FROM TAGLOCATIONS WHERE TAGHEXID = \"" + tagHexID + "\" LIMIT 1";
+						rs1 = st1.executeQuery(cmd);
+						result += "Arrival Date:\n";
+						while(rs1.next()){
+							result += "\t" + rs1.getString(4) 
+							+ " " + rs1.getString(5) + "\n";
+						}
+						
+						
+						//
+						//result += "Path:\n\t" + rs.getString(4) + "\n";
 						tagInfoTextArea.setText(result);
 					}
 
@@ -278,41 +300,42 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 
 					// Add asn to database and to asn list
 					Statement st = wmsConnection.createStatement();
-					String cmd = "INSERT into ASN " + 
-					"VALUES(" + str[0] + ",\"" + str[1] + "\",CURDATE(), CURTIME(),\"" + str[2] +"\")";
+					String cmd = "INSERT into ASN (asncompanyname,asndate,asntime,asndesc)" + 
+					"VALUES(\"" + str[0] + "\",CURDATE(), CURTIME(),\"" + str[1] +"\")";
 					st.executeUpdate(cmd);
 
-					cmd = "SELECT * FROM ASN WHERE ASNID = " + str[0];
+					cmd = "SELECT LAST_INSERT_ID()";
 					ResultSet rs = st.executeQuery(cmd);
 
 					while(rs.next()){
-						String result = "";
-						result += rs.getString(1) + "   " + rs.getString(2) + "   " + rs.getString(3);
-						System.out.println(result);
-						asnModel.insertElementAt(result, 0);
+						Statement st1 = wmsConnection.createStatement();
+						cmd = "SELECT * FROM ASN WHERE ASNID = " + rs.getString(1);
+						ResultSet rs1 = st1.executeQuery(cmd);
+
+						while(rs1.next()){
+							String result = "";
+							result += rs1.getString(1) + "   " + rs1.getString(2) + "   " + rs1.getString(3);
+							System.out.println(result);
+							asnModel.insertElementAt(result, 0);
 
 
-						// add Tags from asn to database
-						in.readLine();
-						String[] tags;
-						Date d = null;
-						Time t = null;
-						System.out.println(str[3]);
-						for(int i = 0; i < Integer.parseInt(str[3]); i++){
-							Statement st1 = wmsConnection.createStatement();
+							// add Tags from asn to database
+							in.readLine();
+							String[] tags;
+							System.out.println(str[2]);
 							
-							tags = in.readLine().split("\t");
-							cmd = "INSERT into TAGS " +
-							"VALUES(\"" + tags[0] + "\",\"" + str[0] + "\", '', '',\"" 
-							+ tags[1] + "\", CURDATE(), " + d + ")";
-							st1.executeUpdate(cmd);
+							for(int i = 0; i < Integer.parseInt(str[2]); i++){
+								Statement st2 = wmsConnection.createStatement();
 
-							cmd = "INSERT into tagLocations " +
-							"VALUES('', \"" + tags[0] + "\", '', ''," + d + "," + t + ")";
-							st1.executeUpdate(cmd);
+								tags = in.readLine().split("\t");
+								cmd = "INSERT into TAGS " +
+								"VALUES(\"" + tags[0] + "\",\"" + rs.getString(1) + "\",\"" 
+								+ tags[1] + "\",'')";
+								System.out.println(cmd);
+								st2.executeUpdate(cmd);
+							}
 						}
 					}
-
 					in.close();
 				} catch (MySQLIntegrityConstraintViolationException e1){
 					e1.printStackTrace();
