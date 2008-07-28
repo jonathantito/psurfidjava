@@ -22,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -40,6 +41,7 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 	JButton importASNButton = new JButton("Import ASN");
 	JButton queryButton = new JButton("Query");
 	JButton exitButton = new JButton("Exit");
+	//JButton clearButton = new JButton("Clear Database");
 
 	DefaultListModel asnModel = new DefaultListModel();
 	DefaultListModel tagModel = new DefaultListModel();
@@ -262,12 +264,23 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 						result += "Arrival Date:\n";
 						while(rs1.next()){
 							result += "\t" + rs1.getString(4) 
-							+ " " + rs1.getString(5) + "\n";
+							+ " " + rs1.getString(5);
 						}
 						
+						cmd = "SELECT * FROM TAGLOCATIONS WHERE TAGHEXID = \"" + tagHexID + "\"";
+						rs1 = st1.executeQuery(cmd);
+						result += "\nPath:\n";
+						while(rs1.next()){
+							Statement st2 = wmsConnection.createStatement();
+							ResultSet rs2;
+							cmd = "SELECT * FROM LOCATIONS WHERE LOCHEXID = \"" + rs1.getString(2) + "\"";
+							rs2 = st2.executeQuery(cmd);
+							while(rs2.next()){
+								result += "\t" + rs2.getString(2);
+							}							
+							result += "   <" + rs1.getString(4) + " " + rs1.getString(5) + ">\n";
+						}						
 						
-						//
-						//result += "Path:\n\t" + rs.getString(4) + "\n";
 						tagInfoTextArea.setText(result);
 					}
 
@@ -349,7 +362,15 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 		}
 
 		if(eSource == queryButton){
-			JOptionPane.showMessageDialog(this, "Coming soon!");
+			//JOptionPane.showMessageDialog(this, "Coming soon!");
+			JTable queryTable;
+			String[] header = {"Name", "Age"};
+			String[][] values = {{"Brian", "21"},{"John", "22"}};
+			queryTable = new JTable(values, header);
+			JOptionPane jop = new JOptionPane();
+			jop.add(queryTable.getTableHeader());
+			jop.add(queryTable);
+			jop.showMessageDialog(this, "");
 		}
 
 		if(eSource == exitButton){
