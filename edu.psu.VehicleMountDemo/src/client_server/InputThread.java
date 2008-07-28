@@ -77,15 +77,7 @@ public class InputThread extends Thread{
 											"SET CURLOCID = \"" + currentLoc + 
 											"\" WHERE TAGHEXID = \"" + hexID + "\"";
 											st2.executeUpdate(cmd);
-										}
-										
-																		
-
-										
-										
-										
-										//System.out.println(cmd);
-										//st2.executeUpdate(cmd);
+										}	
 									}
 								}
 							}
