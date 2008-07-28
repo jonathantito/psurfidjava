@@ -73,13 +73,16 @@ public class InputThread extends Thread{
 									System.out.println(cmd);
 									ResultSet rs1 = st1.executeQuery(cmd);
 
-									cmd = "UPDATE taglocations " +
-									"SET LOCHEXID = \"" + currentLoc + 
-									"\", LOCDESCRIPTION = \"" + rs1.getString(1) + 
-									"\"WHERE TAGHEXID = \"" + hexID + "\"";								
+									while(rs1.next()){
+										Statement st2 = srf.wmsConnection.createStatement();
+										cmd = "UPDATE taglocations " +
+										"SET LOCHEXID = \"" + currentLoc + 
+										"\", LOCDESCRIPTION = \"" + rs1.getString(1) + 
+										"\"WHERE TAGHEXID = \"" + hexID + "\"";								
 
-									System.out.println(cmd);
-									st1.executeUpdate(cmd);
+										System.out.println(cmd);
+										st2.executeUpdate(cmd);
+									}
 								}
 							}
 						} catch (SQLException e) {
