@@ -1,3 +1,4 @@
+package Query;
 
 import java.awt.AWTEvent;
 import java.awt.GridBagConstraints;
@@ -370,7 +371,7 @@ public class QueryClient extends JFrame implements ActionListener, ListSelection
 			JOptionPane jop = new JOptionPane();
 			jop.add(queryTable.getTableHeader());
 			jop.add(queryTable);
-			jop.showMessageDialog(this, "");
+			JOptionPane.showMessageDialog(this, "");
 		}
 
 		if(eSource == exitButton){
