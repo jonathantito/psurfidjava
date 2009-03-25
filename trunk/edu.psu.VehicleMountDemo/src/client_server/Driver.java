@@ -10,6 +10,7 @@ public class Driver {
 	String dash = "\n--------------------------------------------------\n";
 	
 	public Driver(){
+		// start both frames, socketreaderframe is not visible yet
 		new ServerFrame(this);
 		srf = new SocketReaderFrame();
 		
@@ -27,6 +28,7 @@ public class Driver {
 		new Driver();
 	}
 	
+	//gets called when the ip and port are chosen 
 	public void connect(String ip, int port){
 		final int newport = port;
 		final String newip = ip;
