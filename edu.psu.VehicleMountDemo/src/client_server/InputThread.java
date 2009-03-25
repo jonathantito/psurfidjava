@@ -37,6 +37,7 @@ public class InputThread extends Thread{
 						ResultSet rs = st.executeQuery("SELECT LOCHEXID FROM LOCATIONS " +
 								"WHERE LOCHEXID = \"" + hexID + "\"");
 
+						//only change the location if the tag id is found in the DB
 						while(rs.next()){
 							String result = rs.getString(1);
 							if(hexID.equalsIgnoreCase(result))
